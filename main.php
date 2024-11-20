@@ -32,27 +32,70 @@
         <button id="prev" class="slider-btn">◀</button>
         <div class="category-slider">
             <div class="slider-item">
-                <img src="./img/category1.jfif" alt="소설/문학">
+                <a href="board_form.php?category=novel" class="book-link">
+                    <div class="image-wrapper">
+                        <img src="./img/category1.jfif" alt="소설/문학">
+                        <div class="overlay">
+                            <p>게시판에 입장하세요</p>
+                        </div>
+                    </div>
+                </a>
                 <p>소설/문학</p>
             </div>
+
             <div class="slider-item">
-                <img src="./img/category2.jfif" alt="심리/철학">
+                <a href="board_form.php?category=philosophy" class="book-link">
+                    <div class="image-wrapper">
+                        <img src="./img/category2.jfif" alt="심리/철학">
+                        <div class="overlay">
+                            <p>게시판에 입장하세요</p>
+                        </div>
+                    </div>
+                </a>
                 <p>심리/철학</p>
             </div>
             <div class="slider-item">
-                <img src="./img/category3.jfif" alt="사회/현대 이슈">
+                <a href="board_form.php?category=society" class="book-link">
+                    <div class="image-wrapper">
+                        <img src="./img/category3.jfif" alt="사회/현대 이슈">
+                        <div class="overlay">
+                            <p>게시판에 입장하세요</p>
+                        </div>
+                    </div>
+                </a>
                 <p>사회/현대 이슈</p>
             </div>
             <div class="slider-item">
-                <img src="./img/category4.jfif" alt="경제/경영">
+                <a href="board_form.php?category=economy" class="book-link">
+                    <div class="image-wrapper">
+                        <img src="./img/category4.jfif" alt="경제/경영">
+                        <div class="overlay">
+                            <p>게시판에 입장하세요</p>
+                        </div>
+                    </div>
+                </a>
                 <p>경제/경영</p>
             </div>
             <div class="slider-item">
-                <img src="./img/category5.jfif" alt="과학/기술">
+                <a href="board_form.php?category=science" class="book-link">
+                    <div class="image-wrapper">
+                        <img src="./img/category5.jfif" alt="과학/기술">
+                        <div class="overlay">
+                            <p>게시판에 입장하세요</p>
+                        </div>
+                    </div>
+                </a>
                 <p>과학/기술</p>
             </div>
             <div class="slider-item">
-                <img src="./img/category6.jfif" alt="예술/문화">
+                <a href="board_form.php?category=art" class="book-link">
+                    <div class="image-wrapper">
+                        <img src="./img/category6.jfif" alt="예술/문화">
+                        <div class="overlay">
+                            <p>게시판에 입장하세요</p>
+                        </div>
+                    </div>
+                </a>
                 <p>예술/문화</p>
             </div>
         </div>
