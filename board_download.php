@@ -1,31 +1,24 @@
 <?php
-    $real_name = $_GET["real_name"];
-    $file_name = $_GET["file_name"];
-    $file_type = $_GET["file_type"];
-    $file_path = "./data/".$real_name;
+// 파일 이름 가져오기
+$file = isset($_GET["file"]) ? basename($_GET["file"]) : "";
+$file_path = "./data/" . $file;
 
-    $ie = preg_match('~MSIE|Internet Explorer~i', $_SERVER['HTTP_USER_AGENT']) || 
-        (strpos($_SERVER['HTTP_USER_AGENT'], 'Trident/7.0') !== false && 
-            strpos($_SERVER['HTTP_USER_AGENT'], 'rv:11.0') !== false);
+// 파일이 존재하는지 확인
+if (!$file || !file_exists($file_path)) {
+    echo "<script>alert('파일이 존재하지 않습니다.'); history.go(-1);</script>";
+    exit;
+}
 
-    //IE인경우 한글파일명이 깨지는 경우를 방지하기 위한 코드 
-    if( $ie ){
-         $file_name = iconv('utf-8', 'euc-kr', $file_name);
-    }
+// 파일 정보 설정 및 다운로드
+header('Content-Description: File Transfer');
+header('Content-Type: application/octet-stream');
+header('Content-Disposition: attachment; filename="' . basename($file) . '"');
+header('Expires: 0');
+header('Cache-Control: must-revalidate');
+header('Pragma: public');
+header('Content-Length: ' . filesize($file_path));
 
-    if( file_exists($file_path) )
-    { 
-		$fp = fopen($file_path,"rb"); 
-		Header("Content-type: application/x-msdownload"); 
-        Header("Content-Length: ".filesize($file_path));     
-        Header("Content-Disposition: attachment; filename=".$file_name);   
-        Header("Content-Transfer-Encoding: binary"); 
-		Header("Content-Description: File Transfer"); 
-        Header("Expires: 0");       
-    } 
-	
-    if(!fpassthru($fp)) 
-		fclose($fp); 
+// 파일 출력
+readfile($file_path);
+exit;
 ?>
-
-  

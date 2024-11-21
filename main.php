@@ -116,7 +116,7 @@
     <h2>독서 캘린더</h2>
     <div class="calendar-preview">
         <p>캘린더 기능을 통해 읽은 책을 정리하고 관리하세요.</p>
-        <a href="calendar.php" class="btn">캘린더 보기</a>
+        <a href="calendar_view.php" class="btn">캘린더 보기</a>
     </div>
 </section>
 

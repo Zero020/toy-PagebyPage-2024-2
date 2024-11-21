@@ -2,8 +2,8 @@
 // 카테고리 파라미터 가져오기
 $category = isset($_GET['category']) ? $_GET['category'] : '';
 
-// 카테고리 이름 설정
-$category_name = '';
+// 카테고리 이름 설정 (초기값 추가)
+$category_name = '전체 게시판'; // 기본값 설정
 switch ($category) {
     case 'novel':
         $category_name = '소설/문학';
@@ -23,24 +23,11 @@ switch ($category) {
     case 'art':
         $category_name = '예술/문화';
         break;
-    default:
-        $category_name = '전체 게시판';
 }
 
-// 세션 시작 및 사용자 정보 가져오기
-//session_start();
-//$username = isset($_SESSION["username"]) ? $_SESSION["username"] : ""; // 사용자 ID
-//$nickname = isset($_SESSION["nickname"]) ? $_SESSION["nickname"] : ""; // 사용자 닉네임
-//if (isset($_SESSION["nickname"])) $nickname = $_SESSION["nickname"];
-    //else $nickrname = "";
-
-/*if (!$username) {
-    echo "<script>
-            alert('로그인 후 이용해 주세요!');
-            history.go(-1);
-          </script>";
-    exit;
-}*/
+// 세션에서 사용자 정보 가져오기
+session_start();
+$nickname = isset($_SESSION["nickname"]) ? $_SESSION["nickname"] : "익명"; // 기본값: 익명
 ?>
 <!DOCTYPE html>
 <html lang="ko">
@@ -50,65 +37,63 @@ switch ($category) {
 <link rel="stylesheet" type="text/css" href="./css/common.css">
 <link rel="stylesheet" type="text/css" href="./css/board.css">
 <script>
-// 책 정보를 API로 가져오는 함수
-async function fetchBookInfo() {
-    const bookName = document.querySelector('input[name="book_name"]').value.trim();
-    if (!bookName) {
-        alert("책 이름을 입력하세요!");
-        return;
-    }
-
-    try {
-        const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(bookName)}`);
-        const data = await response.json();
-
-        if (data.items && data.items.length > 0) {
-            const book = data.items[0].volumeInfo;
-            document.querySelector('textarea[name="book_info"]').value = `제목: ${book.title}\n저자: ${book.authors ? book.authors.join(', ') : '정보 없음'}\n출판사: ${book.publisher || '정보 없음'}`;
-        } else {
-            alert("책 정보를 찾을 수 없습니다.");
+    // 책 정보를 API로 가져오는 함수
+    async function fetchBookInfo() {
+        const bookName = document.querySelector('input[name="book_name"]').value.trim();
+        if (!bookName) {
+            alert("책 이름을 입력하세요!");
+            return;
         }
-    } catch (error) {
-        alert("책 정보를 가져오는 중 오류가 발생했습니다.");
-        console.error(error);
-    }
-}
 
-// 입력값 검증
-function check_input() {
-    if (!document.board_form.subject.value.trim()) {
-        alert("제목을 입력하세요!");
-        document.board_form.subject.focus();
-        return false;
-    }
-    if (!document.board_form.book_name.value.trim()) {
-        alert("책 이름을 입력하세요!");
-        document.board_form.book_name.focus();
-        return false;
-    }
-    if (!document.board_form.content.value.trim()) {
-        alert("내용을 입력하세요!");
-        document.board_form.content.focus();
-        return false;
-    }
-    document.board_form.submit();
-}
+        try {
+            const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(bookName)}`);
+            const data = await response.json();
 
-// 추천 여부 선택 버튼 로직
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.recommend-btn').forEach(button => {
-        button.addEventListener('click', () => {
-            const value = button.dataset.value; // 'yes' 또는 'no'
-            document.getElementById('recommend-value').value = value;
+            if (data.items && data.items.length > 0) {
+                const book = data.items[0].volumeInfo;
+                document.querySelector('textarea[name="book_info"]').value = `제목: ${book.title}\n저자: ${book.authors ? book.authors.join(', ') : '정보 없음'}\n출판사: ${book.publisher || '정보 없음'}`;
+            } else {
+                alert("책 정보를 찾을 수 없습니다.");
+            }
+        } catch (error) {
+            alert("책 정보를 가져오는 중 오류가 발생했습니다.");
+            console.error(error);
+        }
+    }
 
-            // 버튼 스타일 업데이트 (선택한 버튼 강조 표시)
-            document.querySelectorAll('.recommend-btn').forEach(btn => {
-                btn.classList.remove('selected');
+    // 입력값 검증
+    function check_input() {
+        if (!document.board_form.subject.value.trim()) {
+            alert("제목을 입력하세요!");
+            document.board_form.subject.focus();
+            return false;
+        }
+        if (!document.board_form.book_name.value.trim()) {
+            alert("책 이름을 입력하세요!");
+            document.board_form.book_name.focus();
+            return false;
+        }
+        if (!document.board_form.content.value.trim()) {
+            alert("내용을 입력하세요!");
+            document.board_form.content.focus();
+            return false;
+        }
+        document.board_form.submit();
+    }
+
+    // 추천 여부 설정
+    document.addEventListener('DOMContentLoaded', () => {
+        const recommendButtons = document.querySelectorAll('.recommend-btn');
+        recommendButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                document.getElementById('recommend-value').value = button.dataset.value;
+
+                // 버튼 스타일 업데이트
+                recommendButtons.forEach(btn => btn.classList.remove('selected'));
+                button.classList.add('selected');
             });
-            button.classList.add('selected');
         });
     });
-});
 </script>
 </head>
 <body>
@@ -128,7 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <ul id="board_form">
                 <li>
                     <span class="col1">이름:</span>
-										<span class="col2"><?=$nickname?></span>
+                    <span class="col2"><?= htmlspecialchars($nickname, ENT_QUOTES) ?></span>
                 </li>
                 <li>
                     <span class="col1">제목:</span>
@@ -170,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </ul>
             <ul class="buttons">
                 <li><button type="button" onclick="check_input()">완료</button></li>
-                <li><button type="button" onclick="location.href='board_list.php'">목록</button></li>
+                <li><button type="button" onclick="location.href='board_list.php?category=<?= htmlspecialchars($category, ENT_QUOTES) ?>'">목록</button></li>
             </ul>
         </form>
     </div>
