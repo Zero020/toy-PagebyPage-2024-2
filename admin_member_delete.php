@@ -1,9 +1,9 @@
 <?php
     session_start();
-    if (isset($_SESSION["userlevel"])) $userlevel = $_SESSION["userlevel"];
-    else $userlevel = "";
+    if (isset($_SESSION["isadmin"])) $isadmin = $_SESSION["isadmin"];
+    else $isadmin = "";
 
-    if ( $userlevel != 1 )
+    if ( $isadmin != 1 )
     {
         echo("
             <script>
@@ -14,10 +14,10 @@
                 exit;
     }
 
-    $num   = $_GET["num"];
+    $num   = $_GET["id"];
 
-    $con = mysqli_connect("localhost", "user1", "12345", "sample");
-    $sql = "delete from members where num = $num";
+$con = mysqli_connect("localhost", "root", "", "book_platform");
+    $sql = "delete from users where id = $num";
     mysqli_query($con, $sql);
 
     mysqli_close($con);

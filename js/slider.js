@@ -6,7 +6,7 @@ const dots = document.querySelectorAll('.dot');
 let currentIndex = 0;
 
 function updateSlider() {
-    slider.style.transform = `translateX(-${currentIndex * 30}%)`;
+    slider.style.transform = `translateX(-${currentIndex * 20}%)`;
 
     items.forEach((item, index) => {
         if (index === currentIndex) {

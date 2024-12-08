@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <title>게시판 글 보기</title>
-<link rel="stylesheet" type="text/css" href="./css/common.css">
+<link rel="stylesheet" type="text/css" href="./css/loginbackground.css">
 <link rel="stylesheet" type="text/css" href="./css/board.css">
 </head>
 <body>
@@ -90,31 +90,35 @@
                     <?= nl2br(htmlspecialchars($content, ENT_QUOTES)) ?>
                 </div>
             </li>
-            <li>
+            <div class="recolocation">
+            <li class="row">
                 <span class="col1"><b>책 제목 :</b></span>
                 <span class="col2"><?= htmlspecialchars($book_name, ENT_QUOTES) ?></span>
             </li>
-            <li>
+            <li class="row">
                 <span class="col1"><b>책 정보 :</b></span>
                 <span class="col2"><?= nl2br(htmlspecialchars($book_details, ENT_QUOTES)) ?></span>
             </li>
-            <li>
+            <li class="row">
                 <span class="col1"><b>추천 여부 :</b></span>
+                
                 <span class="col2">
                     <?= $recommend === "yes" ? "👍 추천" : ($recommend === "no" ? "👎 비추천" : "정보 없음") ?>
                 </span>
+    
             </li>
+            </div>
         </ul>
 
         <ul class="buttons">
             <li>
-                <button onclick="location.href='board_list.php?category=<?= urlencode($category) ?>&page=<?= $page ?>'">목록</button>
+                <button class = "brown" onclick="location.href='board_list.php?category=<?= urlencode($category) ?>&page=<?= $page ?>'">목록</button>
             </li>
             <li>
-                <button onclick="location.href='board_modify_form.php?id=<?= $post_id ?>&category=<?= urlencode($category) ?>&page=<?= $page ?>'">수정</button>
+                <button class = "brown" onclick="location.href='board_modify_form.php?id=<?= $post_id ?>&category=<?= urlencode($category) ?>&page=<?= $page ?>'">수정</button>
             </li>
             <li>
-                <button onclick="confirmDelete(<?= $post_id ?>, '<?= urlencode($category) ?>', <?= $page ?>)">삭제</button>
+                <button class = "brown" onclick="confirmDelete(<?= $post_id ?>, '<?= urlencode($category) ?>', <?= $page ?>)">삭제</button>
             </li>
         </ul>
 
@@ -137,8 +141,8 @@
 
                 if ($_SESSION["nickname"] === $comment_author) { // 댓글 작성자만 수정 및 삭제 가능
                     echo "
-                        <button onclick='editComment($comment_id, \"$comment_content\")'>수정</button>
-                        <button onclick='deleteComment($comment_id)'>삭제</button>
+                        <button class = 'brown2' onclick='editComment($comment_id, \"$comment_content\")'>수정</button>
+                        <button class = 'brown2' onclick='deleteComment($comment_id)'>삭제</button>
                     ";
                 }
                 echo "</li>";
@@ -152,8 +156,8 @@
         <form method="post" action="comment_insert.php">
             <input type="hidden" name="post_id" value="<?= $post_id ?>">
             <input type="hidden" name="category" value="<?= htmlspecialchars($category, ENT_QUOTES) ?>">
-            <textarea name="content" placeholder="댓글을 입력하세요" required></textarea>
-            <button type="submit">댓글 작성</button>
+            <textarea class = "comment-box" name="content" placeholder="댓글을 입력하세요" required></textarea>
+            <button type="submit" class="comment-submit">댓글 작성</button>
         </form>
 
         <script>
@@ -166,9 +170,9 @@
 
 		    // 수정 폼 삽입
 		    const editForm = `
-		        <textarea id="edit-text-${commentId}">${currentContent}</textarea>
-		        <button onclick="saveComment(${commentId})">저장</button>
-		        <button onclick="cancelEdit(${commentId}, '${currentContent}')">취소</button>
+		        <textarea class = "comment-box" id="edit-text-${commentId}">${currentContent}</textarea>
+		        <button class = 'brown2' onclick="saveComment(${commentId})">저장</button>
+		        <button class = 'brown2' onclick="cancelEdit(${commentId}, '${currentContent}')">취소</button>
 		    `;
 		    contentSpan.innerHTML = editForm;
 		}

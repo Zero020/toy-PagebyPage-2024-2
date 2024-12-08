@@ -34,7 +34,7 @@
     <?php include "header.php";?>
 </header>  
 <?php
-	if (!$userid )
+	if (!$username )
 	{
 		echo("<script>
 				alert('로그인 후 이용해주세요!');

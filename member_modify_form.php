@@ -2,23 +2,27 @@
 <html>
 <head> 
 <meta charset="utf-8">
-<title>PHP 프로그래밍 입문</title>
-<link rel="stylesheet" type="text/css" href="./css/common.css">
+<title>정보수정</title>
 <link rel="stylesheet" type="text/css" href="./css/member.css">
+<link rel="stylesheet" type="text/css" href="./css/loginbackground.css">
+<link rel="stylesheet" type="text/css" href="./css/membermodify.css">
+<link rel="stylesheet" type="text/css" href="./css/board.css">
+
 <script type="text/javascript" src="./js/member_modify.js"></script>
+
 </head>
 <body> 
 	<header>
     	<?php include "header.php";?>
     </header>
 <?php    
-   	$con = mysqli_connect("localhost", "user1", "12345", "sample");
-    $sql    = "select * from members where id='$userid'";
+$con = mysqli_connect("localhost", "root", "", "book_platform");
+    $sql    = "select * from users where username='$username'";
     $result = mysqli_query($con, $sql);
     $row    = mysqli_fetch_array($result);
 
-    $pass = $row["pass"];
-    $name = $row["name"];
+    $pass = $row["password"];
+    $name = $row["username"];
 
     $email = explode("@", $row["email"]);
     $email1 = $email[0];
@@ -27,17 +31,14 @@
     mysqli_close($con);
 ?>
 	<section>
-		<div id="main_img_bar">
-            <img src="./img/main_img.png">
-        </div>
         <div id="main_content">
       		<div id="join_box">
-          	<form  name="member_form" method="post" action="member_modify.php?id=<?=$userid?>">
+          	<form  name="member_form" method="post" action="member_modify.php?id=<?=$username?>">
 			    <h2>회원 정보수정</h2>
     		    	<div class="form id">
 				        <div class="col1">아이디</div>
 				        <div class="col2">
-							<?=$userid?>
+							<?=$username?>
 				        </div>                 
 			       	</div>
 			       	<div class="clear"></div>
@@ -73,8 +74,8 @@
 			       	<div class="clear"></div>
 			       	<div class="bottom_line"> </div>
 			       	<div class="buttons">
-	                	<img style="cursor:pointer" src="./img/button_save.gif" onclick="check_input()">&nbsp;
-                  		<img id="reset_button" style="cursor:pointer" src="./img/button_reset.gif"
+	                	<img class="buttons-modify" style="cursor:pointer" src="./img/button_save.png" onclick="check_input()">&nbsp;
+                  		<img class="buttons-modify" id="reset_button" style="cursor:pointer" src="./img/button_reset.png"
                   			onclick="reset_form()">
 	           		</div>
            	</form>

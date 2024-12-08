@@ -1,3 +1,6 @@
+@import url('https://hangeul.pstatic.net/hangeul_static/css/nanum-square-neo.css');
+@import url('https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css');
+
 body {
     background-size: cover; /* 화면 크기에 맞게 조절 */
     background-position: center;
@@ -14,21 +17,24 @@ body {
 footer {
     margin-top: auto; /* 푸터를 화면 하단에 고정 */
     height: 100px;
-    background-color: #b03e0e;
+    background-color:transparent;
 }
 
 #footer_content {
     position: relative;
     width: 1000px;
     margin: 0 auto;
-    color: #dddddd;
+    color: #4b382a;
+    font-family: 'NanumSquareNeo';
+
 }
 
 #footer_logo {
     position: absolute;
     top: 30px;
-    left: 50px;
-    font-size: 16px;
+    left: -500px;
+    font-size: 15px;
+
 }
 
 #footer_logo span {
@@ -44,5 +50,10 @@ footer {
 #author {
     position: absolute;
     top: 20px;
-    left: 700px;
+    right: -500px;
+    text-align: right;
+}
+
+#author li{
+    font-size: 15px;
 }

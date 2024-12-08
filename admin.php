@@ -3,7 +3,9 @@
 <head> 
 <meta charset="utf-8">
 <title>PHP 프로그래밍 입문</title>
-<link rel="stylesheet" type="text/css" href="./css/common.css">
+<link rel="stylesheet" type="text/css" href="./css/loginbackground.css">
+<link rel="stylesheet" type="text/css" href="./css/membermodify.css">
+<link rel="stylesheet" type="text/css" href="./css/board.css">
 <link rel="stylesheet" type="text/css" href="./css/admin.css">
 </head>
 <body> 
@@ -19,16 +21,17 @@
 				<li>
 					<span class="col1">번호</span>
 					<span class="col2">아이디</span>
-					<span class="col3">이름</span>
-					<span class="col4">레벨</span>
-					<span class="col5">포인트</span>
+					<span class="col3">닉네임</span>
+					<span class="col4">관리자</span>
 					<span class="col6">가입일</span>
 					<span class="col7">수정</span>
 					<span class="col8">삭제</span>
 				</li>
+
 <?php
-	$con = mysqli_connect("localhost", "user1", "12345", "sample");
-	$sql = "select * from members order by num desc";
+$con = mysqli_connect("localhost", "root", "", "book_platform");
+	$sql = "select * from users order by id desc";
+
 	$result = mysqli_query($con, $sql);
 	$total_record = mysqli_num_rows($result); // 전체 회원 수
 
@@ -36,24 +39,22 @@
 
    while ($row = mysqli_fetch_array($result))
    {
-      $num         = $row["num"];
+      $username        = $row["username"];
 	  $id          = $row["id"];
-	  $name        = $row["name"];
-	  $level       = $row["level"];
-      $point       = $row["point"];
-      $regist_day  = $row["regist_day"];
+	  $name        = $row["nickname"];
+	  $created_at      = $row["created_at"];
+      $is_admin     = $row["is_admin"];
 ?>
 			
 		<li>
-		<form method="post" action="admin_member_update.php?num=<?=$num?>">
-			<span class="col1"><?=$number?></span>
-			<span class="col2"><?=$id?></a></span>
+		<form method="post" action="admin_member_update.php?id=<?=$id?>">
+			<span class="col1"><?=$id?></span>
+			<span class="col2"><?=$username?></a></span>
 			<span class="col3"><?=$name?></span>
-			<span class="col4"><input type="text" name="level" value="<?=$level?>"></span>
-			<span class="col5"><input type="text" name="point" value="<?=$point?>"></span>
-			<span class="col6"><?=$regist_day?></span>
+			<span class="col4"><input type="text" name="is_admin" value="<?=$is_admin?>"></span>
+			<span class="col6"><?=$created_at?></span>
 			<span class="col7"><button type="submit">수정</button></span>
-			<span class="col8"><button type="button" onclick="location.href='admin_member_delete.php?num=<?=$num?>'">삭제</button></span>
+			<span class="col8"><button type="button" onclick="location.href='admin_member_delete.php?id=<?=$id?>'">삭제</button></span>
 		</form>
 		</li>	
 			
@@ -76,7 +77,7 @@
 		</li>
 		<form method="post" action="admin_board_delete.php">
 <?php
-	$sql = "select * from board order by num desc";
+	$sql = "select * from posts order by id desc";
 	$result = mysqli_query($con, $sql);
 	$total_record = mysqli_num_rows($result); // 전체 글의 수
 
@@ -84,16 +85,16 @@
 
    while ($row = mysqli_fetch_array($result))
    {
-      $num         = $row["num"];
-	  $name        = $row["name"];
-	  $subject     = $row["subject"];
+      $num         = $row["id"];
+	  $name        = $row["author_id"];
+	  $subject     = $row["title"];
 	  $file_name   = $row["file_name"];
-      $regist_day  = $row["regist_day"];
+      $regist_day  = $row["created_at"];
       $regist_day  = substr($regist_day, 0, 10)
 ?>
 		<li>
 			<span class="col1"><input type="checkbox" name="item[]" value="<?=$num?>"></span>
-			<span class="col2"><?=$number?></span>
+			<span class="col2"><?=$num?></span>
 			<span class="col3"><?=$name?></span>
 			<span class="col4"><?=$subject?></span>
 			<span class="col5"><?=$file_name?></span>

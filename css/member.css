@@ -1,5 +1,6 @@
 @import url('https://hangeul.pstatic.net/hangeul_static/css/nanum-square-neo.css');
 
+
 /* 메인 컨테이너 */
 #main_content {
     font-family: 'NanumSquareNeo';
@@ -10,8 +11,9 @@
     margin: 150px auto; /* 화면 중앙에 배치 */
     background-color: rgba(255, 255, 255, 0.97); /* 반투명 배경 */
     padding: 20px;
-    border-radius: 3px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+    border-radius: 50px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+    transform: translateY(50px); /* 아주 살짝 왼쪽으로 이동 */
 }
 
 /* 가입 양식 폼 */
@@ -23,16 +25,16 @@
 
 #join_box h2 {
     text-align: center;
-    font-size: 24px;
-    color: #333;
+    font-family: 'NanumSquareNeo';
+    font-size: 30px;
+    font-weight: 900;
+    color:#4b382a;
     margin-bottom: 60px;
-    font-weight: bold;
-
 }
 
 #join_box p {
     text-align: center;
-    font-size: 14px;
+    font-size: 15px;
     color: #555;
 }
 
@@ -55,13 +57,15 @@
 .form-right .form {
     margin-bottom: 20px;
 }
+
 .error-message {
     position: absolute; /* 절대 위치 설정 */
     top: 80%; /* 입력 필드 아래에 표시 */
     left: 0;
     font-size: 12px;
     color: #b03e0e;
-    margin-top: 0;
+    margin-top: -5px;
+    margin-left: 10px;
     white-space: nowrap; /* 줄 바꿈 방지 */
 }
 .col2{
@@ -75,8 +79,8 @@
     padding: 10px;
     border: 1px solid #ccc;
     box-sizing: border-box;
-    font-size: 14px;
-    margin-bottom: 25px;
+    font-size: 15px;
+    margin-bottom: 35px;
     border-top: none;
     border-left: none;
     border-right: none;
@@ -88,17 +92,11 @@ input::placeholder {
 
 .form label {
     display: block;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: bold;
     margin-bottom: 5px;
 }
 
-/* 에러 메시지 */
-.error-message {
-    font-size: 12px;
-    color: #b03e0e;
-    margin-top: -2px;
-}
 
 /* 프로필 사진 */
 .profile-container {
@@ -107,7 +105,7 @@ input::placeholder {
     text-align: center;
     position: relative;
     margin-top: -9px;
-    margin-bottom: 25px;
+    margin-bottom: 38px;
     top: -7px;
 }
 .profile-container h3 {
@@ -141,6 +139,7 @@ input::placeholder {
 .profile-image-icon {
     position: relative;
     z-index: 2;
+    margin-top:5px;
 }
 
 .profile-image-wrapper .upload-icon {
@@ -148,8 +147,8 @@ input::placeholder {
     z-index: 999;
     bottom: 10px; /* 원 밖으로 걸치게 설정 */
     right: -5px;
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -160,17 +159,17 @@ input::placeholder {
 }
 
 .profile-image-wrapper .upload-icon img {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
 }
 
 /* 시작하기 버튼 */
 .buttons {
     position: absolute;
-    right: 90px;
+    right: 250px;
     display: flex;
     justify-content: flex-end; /* 오른쪽 정렬 */
-    margin-top: 10px;
+    margin-top: 50px;
 }
 .buttons .submit-btn:disabled {
     background-color: #efefef; /* 비활성화 상태의 배경색 */
@@ -179,27 +178,59 @@ input::placeholder {
 }
 
 .buttons .submit-btn {
-    background-color: #ee6b4a;
+    font-family: 'NanumSquareExtraBold';
+
+    background-color: #4b382a;
+    border: 1px solid #fff;
     color: #fff;
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: 15px;
     border: none;
-    border-radius: 20px;
+    border-radius: 10px;
     cursor: pointer;
+    width: 200px;
+
 }
 
+.buttons .back-btn {
+    background-color: #4b382a;
+    border: 1px solid #fff;
+    color: #fff;
+    padding: 10px 20px;
+    font-size: 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 200px;
+    margin-right: 30px;
+    height: 55px;
 
+}
+
+.back-btn:hover {
+    background-color: #000000;
+}
+.submit-btn:hover {
+    background-color: #000000;
+}
 /* 이메일 입력 필드 */
 .email-container {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
+    width:100%;
+    position: relative;
+    margin-top:15px;
+}
+
+.email-container input {
+    width: 130px;
 }
 
 .email-container input[type="text"] {
     flex: 1; /* 입력 필드 너비를 균등하게 */
-    padding: 10px; /* 입력 필드 내부 여백 */
-    font-size: 14px; /* 텍스트 크기 */
+    padding: 5px; /* 입력 필드 내부 여백 */
+    font-size: 15px; /* 텍스트 크기 */
     border: 1px solid #ccc; /* 테두리 스타일 */
     box-sizing: border-box; /* 박스 크기 포함 계산 */
     border-top: none;
@@ -209,17 +240,13 @@ input::placeholder {
 }
 
 .email-container span {
-    font-size: 14px; /* @ 기호 크기 */
+    font-size: 20px; /* @ 기호 크기 */
     color: #333;
+    margin-top:-20px;
 }
 
 input:focus, .email-container input[type="text"]:focus {
     outline: none; /* 기본 outline 제거 */
     border-bottom: 2px solid #b03e0e; /* 원하는 색상으로 변경 */
     background-color: transparent;
-}
-footer {
-    margin-top: 150px; /* 메인 콘텐츠와 푸터 사이 간격 추가 */
-    height: 100px;
-    background-color: #e2530b;
 }

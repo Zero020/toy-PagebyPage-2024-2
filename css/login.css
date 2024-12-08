@@ -1,10 +1,17 @@
 @import url('https://hangeul.pstatic.net/hangeul_static/css/nanum-square-neo.css');
+@import url('https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css');
 
 body {
     margin: 0;
     padding: 0;
-    font-family: 'NanumSquareNeo', sans-serif;
+    font-family: 'NanumSquare';
+    color: #4b382a;
 }
+section{
+    color: #4b382a;
+
+}
+
 
 #main_content {
     font-family: 'NanumSquareNeo';
@@ -16,9 +23,10 @@ body {
     height: 500px;
     margin: 150px auto; /* 화면 중앙에 배치 */
     background-color: rgba(255, 255, 255, 0.97); /* 반투명 배경 */
-    padding: 20px;
-    border-radius: 10px;
+    border-radius: 50px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+    transform: translateY(50px); /* 아주 살짝 왼쪽으로 이동 */
+
 }
 
 .form-container {
@@ -27,81 +35,140 @@ body {
     gap: 50px;
     align-items: flex-start;
     width: 100%;
+    height: 100%;
 }
-
+.brown{
+    margin-top:100px;
+}
 .left-title {
     text-align: center;
-    width: 40%;
+    width: 35%;
+    height:100%;
+    font-family: 'NanumSquare';
+    font-weight:2000;
+    background-color: #333;
+    border-radius: 50px  0 0 50px;
 }
 
 .left-title h2, .left-title h3 {
-    margin: 0;
+    margin: 10px;
+    color:#d4d4d4;
+
 }
 
 .left-title h2 {
-    font-size: 32px;
-    font-weight: bold;
+    font-family: '돋음';
+    font-weight: lighter;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+    font-size: 80px;
+    align-items: center;
+    text-align: left;
+    transform: translateY(-60px);
+    margin-left:50px;
 }
 
 .left-title h3 {
-    font-size: 20px;
-    margin: 10px 0;
+    font-size: 30px;
 }
 
-.button_signup {
-    margin-top: 30px;
-}
-
-.signup-btn {
-    background-color: #b03e0e;
-    color: #fff;
+.signin-btn {
+    background-color: #ffffff;
+    color: #333;
     padding: 10px 20px;
-    font-size: 14px;
-    border: none;
-    border-radius: 20px;
+    font-size: 15px;
+    border: 1.5px solid #333;
+    border-radius: 10px;
     cursor: pointer;
+    width: 200px;
+    margin-top:10px;
+}
+.signin-btn:hover{
+    background-color: #333;
+    color:#ffffff;
+
+}
+.signup-btn {
+    transform: translateY(-40px);
+    background-color: #333;
+    color:#ffffff;
+    padding: 10px 20px;
+    font-size: 15px;
+    border: 1.5px solid #333;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 200px;
 }
 
 .signup-btn:hover {
-    background-color: #a8320d;
+    background-color: #ffffff;    
+    color: #333;
+
 }
 
 .login_form {
     width: 50%;
+    margin-top:100px;
+    transform: translateX(-20px); 
 }
 
 .login_title {
-    border-bottom: 2px solid #ffbe10;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
+    width:200px;
+    margin-bottom: 50px;
+    display: flex; /* 플렉스 박스 사용 */
+    justify-content: center; /* 수평 가운데 정렬 */
+    transform: translateX(80px); /* 아주 살짝 왼쪽으로 이동 */
 }
 
 .login_title span {
-    font-size: 24px;
-    font-weight: bold;
+    font-family: 'NanumSquareNeo';
+    font-size: 30px;
+    font-weight: 900;
+    color:#4b382a;
 }
 
 .login_form ul {
     list-style: none;
     padding: 0;
+    width: 400px;
 }
 
 .login_form li {
     margin-bottom: 20px;
 }
+.login_form h1 {
+    margin: 0px;
+    margin-right:10px;
+    font-family: 'NanumSquareNeoExtraBold';
+}
 
 .login_form input {
-    width: 100%;
-    height: 40px;
-    padding: 5px;
-    border: none;
-    border-bottom: 2px solid #ccc;
-    font-size: 16px;
+    width: 90%;
+    padding: 10px 15px; /* 입력값과 placeholder 왼쪽 여백 */
+    margin: 10px 0;
+    border: 2px solid #e4e3e3; /* 기본 테두리 색상 */
+    border-radius: 10px; /* 모서리 둥글게 */
+    background-color: #f7f7f7; /* 배경 회색 */
+    font-size: 14px;
+    box-sizing: border-box;
+    height:55px;
 }
 
 .login_form input:focus {
-    outline: none;
-    border-bottom: 2px solid #b03e0e;
+    border-color: #4b382a; /* 포커스 시 테두리 검정색 */
+    background-color: #fff; /* 포커스 시 배경색 흰색 */
+    color:#000000;
+}
+#password:focus{
+    color: #000 !important;
+
+}
+#password{
+    color:#000000!important;
+
+}
+.login_form input::placeholder {
+    color: #4b382a; /* placeholder 글자 색상 */
+    padding-left: 5px; /* 글자와 테두리 간격 */
 }
 
 .error-message {
@@ -111,21 +178,16 @@ body {
     display: block;
 }
 
-.button_login {
-    text-align: right;
-    margin-top: 20px;
+#button_login {
+    margin-top: 40px; /* 상단 여백 */
+    display: flex; /* 플렉스 박스 사용 */
+    justify-content: center; /* 수평 가운데 정렬 */
+    transform: translateX(-40px); /* 아주 살짝 왼쪽으로 이동 */
 }
 
-.submit-btn {
-    background-color: #b03e0e;
-    color: #fff;
-    padding: 10px 20px;
-    font-size: 14px;
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-}
+
 
 .submit-btn:hover {
-    background-color: #a8320d;
+    background-color: #000000;
+
 }

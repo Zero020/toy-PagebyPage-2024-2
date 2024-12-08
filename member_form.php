@@ -44,6 +44,7 @@
           document.member_form.email2.focus();
           return;
       }
+    
 
       if (document.member_form.pass.value != 
             document.member_form.pass_confirm.value) {
@@ -94,11 +95,16 @@
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
+
             const response = JSON.parse(xhr.responseText);
+
             if (response.status === "available") {
                 message.textContent = response.message;
                 message.style.color = "green";
             } else if (response.status === "taken") {
+                message.textContent = response.message;
+                message.style.color = "red";
+            } else if (response.status === "error") {
                 message.textContent = response.message;
                 message.style.color = "red";
             } else {
@@ -130,7 +136,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     checkFormCompletion();
-	});
+});
 	
 	document.addEventListener("DOMContentLoaded", function () {
     const form = document.querySelector("form[name='member_form']");
@@ -138,12 +144,55 @@ document.addEventListener("DOMContentLoaded", function () {
     const submitButton = document.querySelector(".submit-btn");
     const passwordInput = form.querySelector("input[name='pass']");
     const confirmPasswordInput = form.querySelector("input[name='pass_confirm']");
+    const email1Input = form.querySelector("input[name='email1']");
+    const email2Input = form.querySelector("input[name='email2']");
+    const emailContainer = form.querySelector(".email-container");
+
     const confirmPasswordMessage = document.createElement("span");
+    const passwordMessage = document.createElement("span");
+    const emailMessage = document.createElement("span");
 
-    confirmPasswordMessage.style.fontSize = "12px";
-    confirmPasswordMessage.style.color = "red";
+    function applyMessageStyles(element) {
+    element.style.fontSize = "12px";
+    element.style.color = "red";
+    element.style.display = "block";
+    element.style.transform = "translate(10px, -20px)";
+    }
+
+    applyMessageStyles(confirmPasswordMessage);
+    applyMessageStyles(passwordMessage);
+    applyMessageStyles(emailMessage);
+    //emailMessage.style.display = "block";
+    //emailMessage.style.position = "static";
+    //emailMessage.style.transform = "translate(10px, 30px)";
+
+
+
     confirmPasswordInput.parentNode.appendChild(confirmPasswordMessage);
+    passwordInput.parentNode.appendChild(passwordMessage);
+    emailContainer.parentNode.appendChild(emailMessage);
 
+//비밀번호
+    const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[\W]).{8,}$/;
+    function validatePassword() {
+        if (passwordInput.value.trim() && !passwordRegex.test(passwordInput.value)) {
+            passwordMessage.textContent = "비밀번호는 8자 이상, 대소문자, 숫자, 특수문자를 포함해야 합니다.";
+        } else {
+            passwordMessage.textContent = ""; // 조건 충족 시 메시지 제거
+        }
+    }
+ // 이메일
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    function validateEmail() {
+        const email = `${email1Input.value}@${email2Input.value}`;
+        if ((email1Input.value.trim() || email2Input.value.trim()) && !emailRegex.test(email)) {
+            emailMessage.textContent = "유효한 이메일 형식을 입력해 주세요.";
+            emailMessage.classList.add("error-email");
+        } else {
+            emailMessage.textContent = ""; // 조건 충족 시 메시지 제거
+        }
+    }
+//비밀번호 확인
     function checkFormCompletion() {
         let allFilled = true;
 
@@ -166,10 +215,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     inputs.forEach((input) => {
         input.addEventListener("input", checkFormCompletion);
+        passwordInput.addEventListener("input", validatePassword);
+        email1Input.addEventListener("input", validateEmail);
+        email2Input.addEventListener("input", validateEmail);
     });
 
     checkFormCompletion();
+    validatePassword();
+    validateEmail();
 });
+
+
 function previewImage(event) {
     const file = event.target.files[0];
     const preview = document.getElementById("profile-preview");
@@ -214,8 +270,8 @@ function previewImage(event) {
 			        	<div class="clear"></div>
 			        	<div class="form">
 					        <div class="col1">비밀번호 확인</div>
-						        <div class="col2" style="position: relative;">
-		                	<input type="password" id="password_confirm" name="pass_confirm" placeholder="한번 더 비밀번호를 입력해 주세요">
+						    <div class="col2" style="position: relative;">
+		                	     <input type="password" id="password_confirm" name="pass_confirm" placeholder="한번 더 비밀번호를 입력해 주세요">
 						        </div>                 
 			        	</div>
 			       </div>
@@ -243,12 +299,13 @@ function previewImage(event) {
 			        	<div class="clear"></div>
 			        	<div class="form email">
 				        <div class="col1">이메일</div>
-				        <div class="col2">
+				        <div class="col2"style="position: relative;">
 						        <div class="email-container">
 						            <input type="text" name="email1" placeholder="이메일 주소">
 						            <span>@</span>
-						            <input type="text" name="email2">
+						            <input type="text" name="email2">         
 						        </div>
+
 						    </div>            
 			        	</div>
 			       </div>
@@ -257,7 +314,9 @@ function previewImage(event) {
 		        	<div class="clear"></div>
 		        	<div class="bottom_line"> </div>
 		        	<div class="buttons">
-									<button type="button" class="submit-btn" onclick="check_input()" disabled>시작하기</button>
+                        <button type="button" class="back-btn" onclick="location.href='login_form.php'">취소하기</button>
+						<button type="button" class="submit-btn" onclick="check_input()" disabled>시작하기</button>
+
 	            	</div>
            	</form>
         	</div> <!-- join_box -->

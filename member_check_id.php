@@ -1,13 +1,17 @@
 <?php
 header('Content-Type: application/json');
 
-// ID 값이 비어 있는 경우
-if (!isset($_POST['id']) || empty($_POST['id'])) {
+$id = isset($_POST['id']) ? trim($_POST['id']) : '';
+
+if (empty($id)) {
     echo json_encode(["status" => "error", "message" => "아이디를 입력해 주세요."]);
     exit;
 }
+if (strlen($id) < 5 || strlen($id) > 15){
+    echo json_encode(["status" => "error", "message" => "아이디는 5~15자 이내로 작성해 주세요."]);
+    exit;
+}
 
-$id = trim($_POST['id']);
 
 // 데이터베이스 연결
 $con = mysqli_connect("localhost", "root", "", "book_platform");
@@ -29,6 +33,6 @@ if (mysqli_num_rows($result) > 0) {
 } else {
     echo json_encode(["status" => "available", "message" => "아이디는 사용 가능합니다."]);
 }
-
+mysqli_stmt_close($stmt);
 mysqli_close($con);
 ?>

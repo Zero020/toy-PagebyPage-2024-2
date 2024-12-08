@@ -6,27 +6,170 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #121212; /* 다크 모드 배경 */
-    color: #e0e0e0; /* 텍스트 색상 */
+    background: #111; /* 다크 배경 */
+    color: #fafafa; /* 텍스트 색상 */
+}
+/* 기본 캘린더 텍스트 색상 */
+.fc {
+    color: #ffffff!important;
+}
+.fc-button {
+    background-color: #4b382a!important;
+    color: #ffffff!important; 
+    border: 1px solid #4b382a!important;
+    border-radius: 5px!important; 
+    padding: 5px 10px!important; 
+    font-size: 14px!important;
+    transition: all 0.3s ease; 
+}
+.fc-button:hover {
+    background-color: #ffffff!important;
+    color: #4b382a!important;
+    border: 1px solid #4b382a!important;
 }
 
-/* 캘린더 컨테이너 */
-#calendar-container {
-    width: 80%;
-    margin-top: 20px;
-    background: #1f1f1f; /* 다크 배경 */
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    color: #ddd; /* 캘린더 텍스트 색상 */
+.fc-button.fc-button-active {
+    background-color: #4b382a!important;
+    color: #ffffff!important;
+    border: 1px solid #ffffff!important;
+}
+.fc-daygrid {
+    border-right: none !important;
+    border-left: none !important;
+    border-top: none !important;
+    border-bottom: none !important;
+}
+.fc-daygrid-day-top {
+    color: #ffffff !important;
+    font-size: 14px; 
+    font-weight: bold;
+    text-align: center; 
+    
+}
+.fc-view-harness {
+    border: none !important;
+}
+.fc-view-harness .fc-scrollgrid td {
+    border: none !important;
+}
+.fc-scrollgrid.fc-scrollgrid-liquid {
+    border:none!important;
 }
 
+.fc-daygrid-day {
+    border-right: none !important; 
+    border-left: none !important; 
+}
+
+.fc-scrollgrid {
+    border-left: none !important;  
+    border-right: none !important;
+}
+.fc-day-sun {
+    border-right: none !important; /* 일요일 셀의 오른쪽 테두리 제거 */
+}
+.fc-daygrid-day-frame:last-child {
+    border-right: none !important;
+    border-left: none !important;  
+}
+
+.fc-col-header-cell {
+    border-right: none !important;
+    border-left: none !important; 
+}
+
+/* 기본 캘린더 스타일 */
+.fc {
+    color: #ffffff;
+    font-size: 15px;
+    border:none!important;
+}
 /* 캘린더 스타일 */
 #calendar {
+    color: #ffffff; /* 캘린더 내부 텍스트 색상 */
     max-width: 100%;
-    background-color: #2e2e2e; /* 캘린더 배경 */
-    color: #ddd; /* 캘린더 텍스트 색상 */
-    border-radius: 8px;
+    border-radius: 10px;
+    border:none!important;
+    background-color: #111;
+}
+
+.fc-daygrid-day {
+    background-color: #111; /* 셀 배경색 */
+    color: #ffffff; /* 셀 텍스트 색상 흰색 */
+    border: none;
+    font-size: 15px;
+    border:none!important;
+    border-right: none !important;
+}
+
+
+.fc-daygrid-day:hover {
+    background-color: #333; /* hover 시 배경색 */
+}
+
+/* 오늘 날짜 강조 */
+.fc-day-today {
+    background-color: #000000!important;
+    color: #ffffff; /* 오늘 날짜 텍스트 색상 */
+}
+
+/* 캘린더 내 이벤트 스타일 */
+.fc-event {
+    background-color: transparent!important;
+    color: #ffffff; /* 이벤트 텍스트 흰색 */
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 14px;
+    display: inline-block;
+    transform: translateX(5px)!important;
+    border: 0px !important;
+
+}
+.fc-list-day-cushion{
+    background-color: #000000!important;
+}
+.fc-daygrid-event{
+    background-color: transparent!important;
+
+}
+.fc-event, .fc-event-start, .fc-event-end,
+.fc-event-past, .fc-daygrid-event, .fc-daygrid-block-event, .fc-h-event{
+    background-color: transparent!important;
+
+}
+.fc-daygrid-event{
+    background-color: transparent!important;
+
+}
+.fc-daygrid-event{
+    background-color: transparent!important;
+
+}
+/* 캘린더 이벤트 hover 효과 */
+.fc-event:hover {
+    background-color: transparent;
+}
+#fc-col-header{
+    border-right:none;
+}
+/* 캘린더 컨테이너 */
+#calendar-container {
+    font-size:15px;
+    width: 1200px;
+    color:#000000;
+    height: auto;
+    margin-top: 200px;
+    padding: 20px;
+    background-color:#111;
+    color: #4b382a; /* 캘린더 텍스트 색상 */
+}
+
+#calendar {
+    color:#000000;
+
+    max-width: 100%;
+    color: #ffffff; /* 캘린더 텍스트 색상 */
+    border-radius: 10px;
 }
 
 /* 메모 컨테이너 */
@@ -36,20 +179,48 @@ body {
     justify-content: center; /* 세로 방향 중앙 정렬 */
     align-items: center;     /* 가로 방향 중앙 정렬 */
     position: fixed;
-    top: 50%;
+    top: 55%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 50%;  /* 메모 창 넓이 확대 */
-    height: 80%;
-    max-width: 600px;  /* 최대 너비 확장 */
-    background-color: #333; /* 어두운 배경 */
+    width: 80%;  /* 메모 창 넓이 확대 */
+    height: 1000px;
+    max-width: 1000px;  /* 최대 너비 확장 */
+    background-color: rgba(255, 255, 255, 0.9); /* 어두운 배경 */
     border-radius: 12px; /* 모서리 둥글게 처리 */
     padding: 40px;
     z-index: 1000;
+    overflow: auto;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
     opacity: 0;
     animation: fadeIn 0.5s ease-out forwards;
+    color:#000000;
 }
+
+/* 스크롤바 전체 스타일 */
+#memo-container::-webkit-scrollbar {
+    width: 15px; /* 스크롤바 너비 */
+    height: 200px; /* 스크롤바 높이 */
+}
+
+/* 스크롤바 막대 스타일 */
+#memo-container::-webkit-scrollbar-thumb {
+    background-color: #c6c6c6; /* 스크롤바 색상 */
+    border-radius: 10px; /* 막대 모서리 둥글게 */
+    border: 3px solid rgba(0, 0, 0, 0); /* 막대 테두리 (투명하게 보임) */
+}
+
+/* 스크롤바 막대 hover 시 스타일 */
+#memo-container::-webkit-scrollbar-thumb:hover {
+    background-color: #777; /* hover 상태 색상 */
+}
+
+/* 스크롤바 트랙 스타일 */
+#memo-container::-webkit-scrollbar-track {
+    background-color: #333; /* 트랙 배경 색상 */
+    border-radius: 10px; /* 트랙 모서리 둥글게 */
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5); /* 트랙 그림자 */
+}
+
 
 /* 애니메이션 (페이드 인 + 슬라이드 업) */
 @keyframes fadeIn {
@@ -70,7 +241,14 @@ body {
     flex-direction: column; /* 각 항목을 세로로 배치 */
     width: 100%;  /* 각 필드 너비를 100%로 설정 */
 }
+#memo-container h2{
+    font-size: 23px;
+    margin-bottom: 20px;
 
+}
+label{
+    font-size: 20px;
+}
 /* 텍스트 입력 필드 */
 .memo-field input,
 .memo-field textarea,
@@ -78,35 +256,67 @@ body {
     width: 100%;
     padding: 15px;
     margin-top: 12px; /* 라벨과 간격을 확보 */
-    border-radius: 8px; /* 둥근 모서리 */
-    border: 1px solid #555;
-    background-color: #444; /* 어두운 배경 */
+    border-radius: 10px; /* 둥근 모서리 */
+    border: 2px solid #1c1a1a; /* 기본 테두리 색상 */
+    background-color: #2d2c2c; /* 배경 회색 */
     color: #fff; /* 입력 텍스트 색상 */
     font-size: 16px;
     box-sizing: border-box;
     font-family: 'SF Pro Display', Arial, sans-serif;
 }
-
+.memo-field input:focus,
+.memo-field textarea:focus,
+.memo-field select:focus{
+    border-color: #4b382a; /* 포커스 시 테두리 검정색 */
+    background-color: #ffffff; /* 포커스 시 배경색 흰색 */
+    color:#000000;
+}
 /* 큰 텍스트 영역 */
 .memo-field textarea {
     resize: vertical;
     min-height: 150px;  /* 더 큰 텍스트 영역 */
 }
+#fetch-book-info{
+    font-size:15px;
+    width:100%;
+    background-color: #191919; /* 버튼 색상 */
+    height:40px;
+    align-items: center;
+    border-radius: 10px;
+    color: white;
+    border: none; /* 기본 테두리 색상 */
+    margin-top:5px;
 
+}
+#fetch-book-info:hover{
+    border: 1px solid #e4e3e3;
+    background-color: #000000;
+}
+#cancel-memo{
+    transform: translateX(20px);
+
+}
 /* 버튼 스타일 */
 .memo-actions button {
-    background-color: #ff8a00; /* 버튼 색상 */
+    background-color: #000000; /* 버튼 색상 */
     color: white;
     padding: 15px 25px;  /* 더 넓은 버튼 */
-    border: none;
-    border-radius: 8px;
+    border: 1px solid #e4e3e3; /* 기본 테두리 색상 */
+    border-radius: 20px;
     cursor: pointer;
+    margin-right:20px;
     font-size: 18px;
     margin-top: 20px;
-    width: 100%;  /* 버튼을 수평으로 꽉 채우기 */
+    width: 50%;
+    height:55px;
+    align-items: center;
     transition: background-color 0.3s ease;
 }
+.memo-actions button:hover{
+    background-color: #4b382a; /* 버튼 색상 */
 
+
+}
 /* 취소 버튼 */
 .memo-actions button:last-child {
     margin-right: 0; /* 마지막 버튼 간격 제거 */
@@ -155,20 +365,57 @@ button.delete:hover {
 
 /* 캘린더 내 이벤트 스타일 */
 .fc-event {
-    background-color: #007bff;
+    background-color:transparent;
     color: #fff;
-    border-radius: 5px;
+    border-radius: 0px;
     padding: 5px;
     font-size: 14px;
     display: inline-block;
+
 }
 
 /* 캘린더 이벤트 hover 효과 */
 .fc-event:hover {
-    background-color: #0056b3;
+    background-color: #efefef!important;
+    color:#000000!important;
 }
 
 /* 날짜 클릭 시 강조 색상 */
 .fc-daygrid-day-top {
     color: #ff8a00; /* 클릭된 날짜 강조 */
+}
+/* 스크롤바 전체 스타일 */
+.fc-scroller::-webkit-scrollbar {
+    width: 12px; 
+    height: 12px;
+}
+
+/* 스크롤바 트랙 (배경) */
+.fc-scroller::-webkit-scrollbar-track {
+    background: #222;
+    border-radius: 10px; 
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5); 
+}
+
+/* 스크롤바 핸들 (막대) */
+.fc-scroller::-webkit-scrollbar-thumb {
+    background: #c5c5c5; 
+    border-radius: 10px; 
+    border: 3px solid transparent; 
+    background-clip: padding-box; 
+}
+
+/* 스크롤바 핸들 hover 시 */
+.fc-scroller::-webkit-scrollbar-thumb:hover {
+    background: #ffffff; 
+}
+
+/* 스크롤바 핸들 active 시 */
+.fc-scroller::-webkit-scrollbar-thumb:active {
+    background: #d5d5d5; 
+}
+
+/* 스크롤바 코너 (수직/수평 교차 지점) */
+.fc-scroller::-webkit-scrollbar-corner {
+    background: #222; 
 }

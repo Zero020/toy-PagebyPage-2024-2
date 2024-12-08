@@ -3,8 +3,9 @@
 <head> 
 <meta charset="utf-8">
 <title>게시판 글 수정</title>
-<link rel="stylesheet" type="text/css" href="./css/common.css">
+<link rel="stylesheet" type="text/css" href="./css/loginbackground.css">
 <link rel="stylesheet" type="text/css" href="./css/board.css">
+
 <script>
   function check_input() {
       if (!document.board_form.subject.value.trim()) {
@@ -26,9 +27,6 @@
     <?php include "header.php"; ?>
 </header>  
 <section>
-	<div id="main_img_bar">
-        <img src="./img/main_img.png">
-    </div>
    	<div id="board_box">
 	    <h3 id="board_title">게시판 > 글 수정</h3>
 <?php

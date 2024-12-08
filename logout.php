@@ -1,9 +1,13 @@
 <?php
   session_start();
-  unset($_SESSION["userid"]);
+
   unset($_SESSION["username"]);
-  unset($_SESSION["userlevel"]);
+  unset($_SESSION["nickname"]);
+  unset($_SESSION["isadmin"]);
   unset($_SESSION["userpoint"]);
+  unset($_SESSION["profile_image"]);
+
+  session_destroy();
   
   echo("
        <script>

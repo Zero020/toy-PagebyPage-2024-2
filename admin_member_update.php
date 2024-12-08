@@ -1,9 +1,9 @@
 <?php
     session_start();
-    if (isset($_SESSION["userlevel"])) $userlevel = $_SESSION["userlevel"];
-    else $userlevel = "";
+    if (isset($_SESSION["isadmin"])) $isadmin = $_SESSION["isadmin"];
+    else $isadmin = "";
 
-    if ( $userlevel != 1 )
+    if ( $isadmin != 1 )
     {
         echo("
             <script>
@@ -14,12 +14,11 @@
         exit;
     }
 
-    $num   = $_GET["num"];
-    $level = $_POST["level"];
-    $point = $_POST["point"];
+    $num   = $_GET["id"];
+    $is_admin = $_POST["is_admin"];
 
-    $con = mysqli_connect("localhost", "user1", "12345", "sample");
-    $sql = "update members set level=$level, point=$point where num=$num";
+$con = mysqli_connect("localhost", "root", "", "book_platform");
+    $sql = "update users set is_admin=$is_admin where id=$num";
     mysqli_query($con, $sql);
 
     mysqli_close($con);

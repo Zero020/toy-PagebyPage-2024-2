@@ -1,9 +1,9 @@
 <?php
     session_start();
-    if (isset($_SESSION["userlevel"])) $userlevel = $_SESSION["userlevel"];
-    else $userlevel = "";
+    if (isset($_SESSION["isadmin"])) $isadmin = $_SESSION["isadmin"];
+    else $isadmin = "";
 
-    if ( $userlevel != 1 )
+    if ( $isadmin != 1 )
     {
         echo("
                     <script>
@@ -24,12 +24,12 @@
                     </script>
         ");
 
-    $con = mysqli_connect("localhost", "user1", "12345", "sample");
+$con = mysqli_connect("localhost", "root", "", "book_platform");
 
     for($i=0; $i<count($_POST["item"]); $i++){
         $num = $_POST["item"][$i];
 
-        $sql = "select * from board where num = $num";
+        $sql = "select * from posts where id = $num";
         $result = mysqli_query($con, $sql);
         $row = mysqli_fetch_array($result);
 
@@ -41,7 +41,7 @@
             unlink($file_path);
         }
 
-        $sql = "delete from board where num = $num";
+        $sql = "delete from posts where id = $num";
         mysqli_query($con, $sql);
     }       
 

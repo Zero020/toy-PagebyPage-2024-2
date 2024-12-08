@@ -3,6 +3,7 @@ session_start();
 
 $username = $_POST["username"];
 $password = $_POST["password"];
+$id = $_POST["id"];
 
 $con = mysqli_connect("localhost", "root", "", "book_platform");
 if (!$con) {
@@ -19,10 +20,14 @@ if (mysqli_num_rows($result) == 1) {
         $_SESSION["username"] = $row["username"];
         $_SESSION["nickname"] = $row["nickname"] ?? "닉네임 없음"; // 닉네임이 없으면 기본값 설정
         $_SESSION["email"] = $row["email"] ?? "이메일 없음";
+        $_SESSION["isadmin"]=$row["is_admin"]?? "";
+        $_SESSION["id"]=$row["id"]?? "";
+
+        $_SESSION["profile_image"] = $row["profile_image"] ?? "default.png"; // 프로필 이미지 저장, 기본값 설정
+
 
 
         echo "<script>
-                alert('로그인 성공!');
                 location.href = 'index.php';
               </script>";
               var_dump($_SESSION);

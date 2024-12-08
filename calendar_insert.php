@@ -6,8 +6,9 @@ if (!$con) {
 }
 
 // 세션 처리, 사용자 ID 가져오기
-session_start();
-$username = $_SESSION["username"] ?? "";
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}$username = $_SESSION["username"] ?? "";
 
 // 데이터 가져오기
 $bookTitle = htmlspecialchars($_POST["book_title"] ?? '', ENT_QUOTES);

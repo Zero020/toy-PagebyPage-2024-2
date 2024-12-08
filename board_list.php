@@ -3,8 +3,10 @@
 <head> 
 <meta charset="utf-8">
 <title>게시판 목록보기</title>
-<link rel="stylesheet" type="text/css" href="./css/common.css">
 <link rel="stylesheet" type="text/css" href="./css/board.css">
+<link rel="stylesheet" type="text/css" href="./css/loginbackground.css">
+
+
 </head>
 <body> 
 <header>
@@ -12,7 +14,6 @@
 </header>  
 <section>
 	<div id="main_img_bar">
-        <img src="./img/main_img.png">
     </div>
    	<div id="board_box">
 	    <h3>게시판 > 목록보기</h3>
@@ -20,6 +21,7 @@
 	    <!-- 카테고리 선택 -->
 	    <form method="get" action="board_list.php">
 	        <label for="category">카테고리 선택:</label>
+	        <div class = "dropdown-category">
 	        <select name="category" id="category" onchange="this.form.submit()">
 	            <option value="novel" <?= isset($_GET['category']) && $_GET['category'] == 'novel' ? 'selected' : '' ?>>소설/문학</option>
 	            <option value="philosophy" <?= isset($_GET['category']) && $_GET['category'] == 'philosophy' ? 'selected' : '' ?>>심리/철학</option>
@@ -28,6 +30,7 @@
 	            <option value="science" <?= isset($_GET['category']) && $_GET['category'] == 'science' ? 'selected' : '' ?>>과학/기술</option>
 	            <option value="art" <?= isset($_GET['category']) && $_GET['category'] == 'art' ? 'selected' : '' ?>>예술/문화</option>
 	        </select>
+	    </div>
 	    </form>
 
 	    <ul id="board_list">
@@ -131,11 +134,11 @@
 <?php 
     if (isset($_SESSION["username"])) {
 ?>
-				<button onclick="location.href='board_form.php?category=<?= $category ?>'">글쓰기</button>
+				<button class="write-board" onclick="location.href='board_form.php?category=<?= $category ?>'">글쓰기</button>
 <?php
 	} else {
 ?>
-				<a href="javascript:alert('로그인 후 이용해 주세요!')"><button>글쓰기</button></a>
+				<li><a href="javascript:alert('로그인 후 이용해 주세요!')"><button type ="button">글쓰기</button></a>
 <?php
 	}
 ?>
