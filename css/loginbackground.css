@@ -2,22 +2,26 @@
 @import url('https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css');
 
 body {
-    background-size: cover; /* 화면 크기에 맞게 조절 */
+    background-size: cover;
+    /* 화면 크기에 맞게 조절 */
     background-position: center;
     background-repeat: no-repeat;
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    min-height: 100vh; /* 화면 전체 높이 보장 */
+    min-height: 100vh;
+    /* 화면 전체 높이 보장 */
     display: flex;
-    flex-direction: column; /* 콘텐츠와 푸터를 세로로 정렬 */
+    flex-direction: column;
+    /* 콘텐츠와 푸터를 세로로 정렬 */
 }
 
 /* 하단 푸터 */
 footer {
-    margin-top: auto; /* 푸터를 화면 하단에 고정 */
+    margin-top: auto;
+    /* 푸터를 화면 하단에 고정 */
     height: 100px;
-    background-color:transparent;
+    background-color: transparent;
 }
 
 #footer_content {
@@ -54,6 +58,7 @@ footer {
     text-align: right;
 }
 
-#author li{
+#author li {
     font-size: 15px;
 }
+
