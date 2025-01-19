@@ -1,0 +1,32 @@
+button[type="button"],  input[type="file"]::-webkit-file-upload-button {
+
+    background-color: #ffffff;
+    color: #4b382a;
+    font-size: 17px;
+    border: 1px solid #999;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 200px;
+    height: 40px;
+    margin-right:1rem;
+}
+
+.file-dirty{
+    border:transparent;
+    height:auto;
+}
+
+input[type="file"]{
+    font-size: 17px;
+}
+button[type="button"]:hover {
+    background-color: #eee;
+    color: #4b382a;
+}
+
+button[type="button"]:focus {
+    border-color: #4b382a;
+    /* 포커스 시 테두리 검정색 */
+    color: #fff!important;
+    /* 포커스 시 배경색 흰색 */
+}
